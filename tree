@@ -1,0 +1,117 @@
+package linkedlist;
+
+import java.util.Scanner;
+
+public class LinkedList {
+	Node head;
+	// this is the node definition
+	class Node{
+		Node left;
+		int data;
+		Node right;
+		
+		Node(int data)
+	   {
+			this.left=null;
+			this.data = data;
+			this.right = null;
+		}
+	}
+	private void append(int data) {
+		Node temp,new_node;
+		temp = head;
+		new_node =  new Node(data);
+		if(head ==null) { 
+			head=new_node;
+		}
+		else {
+			  while(true)
+			  {
+				  if(data<temp.data)
+				  {
+					  if(temp.left!=null)
+					  {
+						  temp=temp.left;
+					  }
+					  else {
+						  
+						  temp.left=new_node;
+						 break;
+					  }
+				  }
+				  else 
+				  {
+					  if(temp.right!=null)
+					  {
+						  temp=temp.right;
+					  }
+					  else 
+					  {
+						  temp.right=new_node;
+							 break;
+					  }
+				  }
+			  }
+		}
+		
+	}	
+	private void inorder(Node head) {
+		Node temp = head;
+		if(temp==null) 
+		{
+			return;
+		}
+			
+		inorder(temp.left);
+		System.out.println(temp.data);
+		inorder(temp.right);
+		
+	}
+	private void preorder(Node head) {
+		Node temp = head;
+		if(temp==null) 
+		{
+			return;
+		}
+		System.out.print(temp.data +" ->");
+		preorder(temp.left);
+		preorder(temp.right);
+		
+	}
+	private void postorder(Node head) {
+		Node temp = head;
+		if(temp==null) 
+		{
+			return;
+		}
+			
+		postorder(temp.left);
+		System.out.println(temp.data);
+		postorder(temp.right);
+		
+	}
+	
+	public static void main(String args[])
+	{
+		int data;
+		LinkedList list = new LinkedList();
+		Scanner sc= new Scanner(System.in);
+		do
+		{
+			data = sc.nextInt();
+			if(data>0)
+			{
+				list.append(data);
+			}
+		}while(data>0);
+		System.out.println("Inorder list ");
+		list.inorder(list.head);
+		
+		System.out.println("Preorder list ");
+		list.preorder(list.head);
+		
+		System.out.println("Postorder list ");
+		list.postorder(list.head);	
+	}
+
+}
